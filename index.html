@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine?</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: 'Arial', sans-serif;
+            background-color: #ffebee;
+            overflow: hidden;
+        }
+        h1 { color: #d32f2f; }
+        .buttons { display: flex; gap: 20px; margin-top: 20px; }
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        #yesBtn { background-color: #4caf50; color: white; }
+        #noBtn {
+            background-color: #f44336;
+            color: white;
+            position: absolute; /* Vital for moving it around */
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Will you be my Valentine? ❤️</h1>
+    
+    <div class="buttons">
+        <button id="yesBtn" onclick="celebrate()">YES!</button>
+        <button id="noBtn" onmouseover="moveButton()">No</button>
+    </div>
+
+    <script>
+        function moveButton() {
+            const btn = document.getElementById('noBtn');
+            // Calculate random positions (subtracting button size so it stays on screen)
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+            
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+        }
+
+        function celebrate() {
+            alert("Yay! Best decision ever! 🥰");
+            // You can redirect her to a cute GIF or a photo of you two here
+        }
+    </script>
+</body>
+</html>
