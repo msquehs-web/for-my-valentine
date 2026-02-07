@@ -4,53 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Be My Valentine?</title>
-   <style>
-    body {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        margin: 0;
-        font-family: 'Arial', sans-serif;
-        background-color: #ffebee;
-        overflow: hidden; /* Prevents scrollbars when button moves */
-    }
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #ffebee;
+            overflow: hidden;
+        }
 
-    h1 { color: #d32f2f; margin-bottom: 30px; }
+        h1 { color: #d32f2f; margin-bottom: 30px; text-align: center; padding: 0 20px; }
 
-    .btn-container {
-        position: relative;
-        width: 300px; /* Gives the buttons some breathing room */
-        height: 100px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+        .btn-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 200px;
+        }
 
-    button {
-        padding: 15px 30px;
-        font-size: 1.2rem;
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
-        transition: transform 0.1s; /* Makes the "Yes" button feel responsive */
-    }
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
 
-    #yesBtn {
-        background-color: #4caf50;
-        color: white;
-        margin-right: 80px; /* Pushes the 'Yes' away from where 'No' starts */
-    }
+        #yesBtn {
+            background-color: #4caf50;
+            color: white;
+            z-index: 1; /* Keep Yes on top */
+            transition: transform 0.2s;
+        }
 
-    #noBtn {
-        background-color: #f44336;
-        color: white;
-        position: absolute; /* Kept absolute so it can jump anywhere */
-        transition: 0.2s ease; /* Makes the jump look smoother */
-    }
-</style>
+        #yesBtn:active { transform: scale(0.9); }
 
+        #noBtn {
+            background-color: #f44336;
+            color: white;
+            position: absolute; 
+            transition: 0.2s ease;
+            /* Initial position offset from center */
+            margin-left: 180px; 
+        }
+    </style>
+</head>
 <body>
 
     <h1>Софія, will you be my valentine? ❤️</h1>
@@ -60,11 +65,15 @@
         <button id="noBtn" onmouseover="moveButton()" ontouchstart="moveButton()">No</button>
     </div>
 
-    </body>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
     <script>
         function moveButton() {
             const btn = document.getElementById('noBtn');
-            // Calculate random positions (subtracting button size so it stays on screen)
+            
+            // Remove the initial margin so it moves purely by coordinates
+            btn.style.margin = '0';
+
             const x = Math.random() * (window.innerWidth - btn.offsetWidth);
             const y = Math.random() * (window.innerHeight - btn.offsetHeight);
             
@@ -73,8 +82,18 @@
         }
 
         function celebrate() {
-            alert("УРААААА, МАЯ КАЗАЧКА 🥰");
-            // You can redirect her to a cute GIF or a photo of you two here
+            // Trigger Confetti
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#ff0000', '#ff69b4', '#ffffff']
+            });
+
+            // Delay the alert slightly so she sees the confetti first
+            setTimeout(() => {
+                alert("УРААААА, МАЯ КАЗАЧКА 🥰");
+            }, 500);
         }
     </script>
 </body>
